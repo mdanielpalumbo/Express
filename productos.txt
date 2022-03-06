@@ -1,0 +1,1 @@
+[{"name":"Escuadra","price":"20","thumb":"##","id":1},{"name":"Regla","price":"20","thumb":"##","id":2},{"name":"Calculadora","price":"200","thumb":"##","id":3}]
