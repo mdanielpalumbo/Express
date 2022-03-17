@@ -1,27 +1,18 @@
-import express from "express";
-import { Contenedor } from "./Contenedor.js"
+import express from 'express'
+import prodsRouter from './routers/prodsRouter.js'
 
 const app = express()
-const prods = new Contenedor('productos')
-app.use(express.json())
 
-app.get('/productos', async (req,res) => {
-    const content = await prods.getAll()
-    res.json(content)
-})
-
-app.get('/productoRandom', async (req,res) => {
-    let content = await prods.getAll()
-    content = content[Math.floor(Math.random()*content.length)]
-    res.send(content)
-})
+app.use(
+    express.json(),
+    express.urlencoded({extended:true})
+)
+app.use('/api/productos', express.static('./public'))
+app.use('/api/productos', prodsRouter)
 
 const PORT = 8080
 
-const server = app.listen(PORT,() => {
-    console.log(`Servidor conectado y escuchando puerto ${PORT}`)
+app.listen(PORT, () => {
+    console.log(`Servidor conectado y escuchando el puerto ${PORT}`)
 })
 
-server.on('error', err => {
-    console.log(`error en servidor: ${err}`)
-})
